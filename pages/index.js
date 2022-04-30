@@ -166,19 +166,7 @@ const addData = () => {
               </select>
             </div>
             <div className='buttonsDiv'>
-              {isUpdate ? (
-                <button disabled='true' onClick={updateFields}>ADD</button> 
-              ) :
-              (  
-                <button onClick={addData}>ADD</button> 
-              )}
-              <br />
-              {isUpdate ? (
-                <button className='modifyButton' onClick={updateFields}>MODIFY</button> 
-              ) :
-              (  
-                <button className='modifyButton' disabled='true' onClick={updateFields}>MODIFY</button> 
-              )}
+              
             </div>
           </div>
         </div>
