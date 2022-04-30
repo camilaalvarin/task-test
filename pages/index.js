@@ -5,9 +5,6 @@ import { useState, useEffect  } from 'react'
 import { useRouter } from 'next/router'
 import { collection, addDoc, getDocs, doc, updateDoc, deleteDoc } from 'firebase/firestore'
 import { BsFillPencilFill, BsXLg } from "react-icons/bs";
-// import updateFields from './api/tasks/update'
-// import deleteDocs from './api/tasks/delete'
-// import list from './api/tasks/list'
 
 import { database } from '../firebaseConfig';
 // import { collection, addDoc } from 'firebase/firestore';
