@@ -7,7 +7,6 @@ import { collection, addDoc, getDocs, doc, updateDoc, deleteDoc } from 'firebase
 import { BsFillPencilFill, BsXLg } from "react-icons/bs";
 
 import { database } from '../firebaseConfig';
-// import { collection, addDoc } from 'firebase/firestore';
 
 export default function Home() {
 
