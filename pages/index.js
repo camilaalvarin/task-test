@@ -243,6 +243,52 @@ const addData = () => {
             display: none;  
         }
 
+          .borderDiv {
+            height: fit-content;
+            margin-top: 10px;
+          }
+
+          .liDiv {
+            display: flex;
+            justify-content: space-between;
+            color: #333333;
+            border-bottom: 2px solid white;
+            width: 400px;
+            height: 48px;
+            padding-bottom: 7px;
+          }
+
+          .liDiv button{
+            margin-left: 10px;
+          }
+
+          .you {
+            margin-rigth: 100px;
+          }
+
+          button {
+            padding: 8px;
+            width: 100px;
+            background-color: #333333;
+            color: #ffb014;
+            font-weight: bolder;
+            border: 1px solid #333333;
+            border-radius: 3px;
+            cursor: pointer;
+          }
+
+          .xButton {
+            width: 20px;
+            background-color: #ffb014;
+            color: #333333;
+            font-weight: bold;
+            border: 0px;
+            margin-right: 10px;
+            cursor: pointer;
+            font-size: 20px;
+            margin-top: 4px;
+          }
+
           
     `}</style>
     </div>
