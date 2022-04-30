@@ -44,18 +44,6 @@ const addData = () => {
     
 }
 
-  // function AddItem () {
-  //   if(item != '' && !tasks.includes(item)) {
-  //     let temp = tasks;
-  //     temp.push(item)
-  //     setTasks(temp);
-  //     setItem('')
-  //   } else {
-  //     alert ('Esa tarea ya existe!')
-  //     setItem('')
-  //   }
-  // }
-
   const getData = async () => {
     await getDocs(databaseRef)
     .then((response) => {
