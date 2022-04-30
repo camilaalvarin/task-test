@@ -77,7 +77,57 @@ const register = () => {
                 </div>
             </div>
         </div>
-        
+        <style jsx>{`
+            .borderDiv {
+                width: fit-content;
+                border-radius: 20px;
+                box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 2px 0px;
+            }
+
+            .gridDiv {
+                display: grid;
+                justify-content: center;
+                align-content: center;
+                padding: 20px;
+            }
+
+            .flexDiv {
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                align-content: center;
+                width: fit-content;
+                margin: 0 auto;
+                margin-top: 70px;
+            }
+
+            input {
+                width: 300px;
+                border: 1px solid gray;
+                border-radius: 5px;
+                padding: 10px;
+            }
+
+            button {
+                width: 300px;
+                padding: 9px;
+                border-radius: 5px;
+            }
+
+            p {
+                padding: 10px;
+                text-align: center;
+            }
+
+            .methods {
+                display: flex;
+                justify-content: center;
+            }
+
+            span {
+                cursor: pointer;
+            }
+        `}</style>
       </div>
   )
 } 
