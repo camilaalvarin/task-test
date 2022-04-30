@@ -223,8 +223,6 @@ const addData = () => {
           .navTitle p {
             margin-left: 120px;
           }
-
-
           .newTask {
             display: grid;
             margin-left: 100px;
