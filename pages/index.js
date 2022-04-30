@@ -315,6 +315,16 @@ const addData = () => {
             padding: 10px;
             margin-top: 15px;
           }
+
+          .buttonsDiv {
+            display: grid;
+            justify-self: end;
+            margin-top: 20px;
+          }
+
+          .modifyButton {
+            margin-top: -10px;
+          }
     `}</style>
     </div>
 
