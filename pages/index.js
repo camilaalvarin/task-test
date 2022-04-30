@@ -289,7 +289,32 @@ const addData = () => {
             margin-top: 4px;
           }
 
-          
+          input {
+            background-color: #ffb014;
+            border: none;
+            color: #333333;
+            width: 300px;
+            border-bottom: 2px solid white;
+            padding: 10px;
+          }
+
+          input::-webkit-input-placeholder {
+            color: #333333;
+        }
+
+          *:focus {
+            outline: none;
+        }
+
+          select {
+            background-color: #ffb014;
+            border: none;
+            color: #333333;
+            width: 300px;
+            border-bottom: 2px solid white;
+            padding: 10px;
+            margin-top: 15px;
+          }
     `}</style>
     </div>
 
