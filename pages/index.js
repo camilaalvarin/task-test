@@ -225,6 +225,24 @@ const addData = () => {
           }
 
 
+          .newTask {
+            display: grid;
+            margin-left: 100px;
+          }
+
+          .taskList {
+            max-width: 400px;
+            max-height: 200px;
+            overflow: hidden;
+            overflow-y: scroll;
+          }
+
+          .taskList::-webkit-scrollbar {
+            width: 8px;     
+            height: 8px;    
+            display: none;  
+        }
+
           
     `}</style>
     </div>
