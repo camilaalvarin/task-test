@@ -183,7 +183,50 @@ const addData = () => {
           </div>
         </div>
       </div>
-   
+      <style jsx>{`
+          @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap');
+          .container {
+            display: grid;
+            justify-content: center;
+          }
+
+          .border {
+            width: fit-content;
+            background-color: #ffb014;
+            padding: 50px;
+            margin-top: 150px;
+          }
+          .flex {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+
+          h2 {
+            width: 200px;
+            font-weight: bold;
+            color: #333333;
+            border-bottom: 2px solid white;
+            padding-bottom: 15px;
+            font-size: poppins;
+          }
+
+          .navTitle {
+            position: absolute;
+            width: 100%;
+            padding: 10px;
+            background-color: #333333;
+            color: white;
+            font-weight: bolder;
+          }
+
+          .navTitle p {
+            margin-left: 120px;
+          }
+
+
+          
+    `}</style>
     </div>
 
   )
