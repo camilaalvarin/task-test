@@ -10,7 +10,7 @@ const firebaseConfig = {
     storageBucket: "task-test-34881.appspot.com",
     messagingSenderId: "501336745599",
     appId: "1:501336745599:web:a368cbd500d97b785ac14a",
-  };
+  }; 
 
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);

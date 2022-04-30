@@ -144,7 +144,7 @@ const addData = () => {
           </div>
           <div className='newTask'>
             <div>
-              <input placeholder='Item Name' value={item}
+              <input placeholder='New Todo' value={item}
                 onChange={(e) => {
                   setItem(e.target.value)
                 }}
