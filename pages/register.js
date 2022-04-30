@@ -4,8 +4,6 @@ import { app } from '../firebaseConfig'
 import { useState, useEffect } from "react"
 import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, GithubAuthProvider, signInWithPopup } from 'firebase/auth'
 import { useRouter } from "next/router";
-// import { FcGoogle } from "react-icons/fc";
-// import { FaGithub } from "react-icons/fa";
 
 const register = () => {
 
