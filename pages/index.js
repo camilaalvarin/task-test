@@ -1,6 +1,4 @@
 import Head from 'next/head'
-import Image from 'next/image'
-// import styles from '../styles/main.module.css'
 import { useState, useEffect  } from 'react'
 import { useRouter } from 'next/router'
 import { collection, addDoc, getDocs, doc, updateDoc, deleteDoc } from 'firebase/firestore'
@@ -31,7 +29,6 @@ const addData = () => {
       tasks: item
     })
     .then(() => {
-      // alert('Data sent!')
       getData()
       setTasks('')
       setItem('')
@@ -92,7 +89,6 @@ const addData = () => {
       tasks: item
     })
     .then(() => {
-      // alert('Data Updated');
       setIsUpdate(false)
       getData()
     })
@@ -106,7 +102,6 @@ const addData = () => {
     let fieldToEdit = doc(database, 'camila', id);
     deleteDoc(fieldToEdit)
     .then(() => {
-      // alert('Data Deleted');
       getData()
     })
     .catch((err) => {
