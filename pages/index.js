@@ -70,7 +70,53 @@ const addData = () => {
     );
   } 
 
+  function AddItem () {
+    if(item != '' && !tasks.includes(item)) {
+      let temp = tasks;
+      temp.push(item)
+      setTasks(temp);
+      setItem('')
+    } else {
+      alert ('Esa tarea ya existe!')
+      setItem('')
+    }
+  }
 
+  const getID = (id, tasks) => {
+    setID(id)
+    setItem(tasks)
+    setTasks(tasks)
+    setIsUpdate(true)
+  }
+
+  const updateFields = () => {
+    let fieldToEdit = doc(database, 'camila', ID);
+    console.log(ID)
+    updateDoc(fieldToEdit, {
+      tasks: item
+    })
+    .then(() => {
+      // alert('Data Updated');
+      setIsUpdate(false)
+      getData()
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+    setItem('')
+  }
+
+  const deleteDocs = (id) => {
+    let fieldToEdit = doc(database, 'camila', id);
+    deleteDoc(fieldToEdit)
+    .then(() => {
+      // alert('Data Deleted');
+      getData()
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
 
   return (
     <div className='container'>
