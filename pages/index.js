@@ -16,13 +16,13 @@ export default function Home() {
   const [isUpdate, setIsUpdate] = useState(false);
 
   useEffect(() => {
-    // let token = sessionStorage.getItem('Token')
-    // if(token){
-    //   getData()
-    // }
-    // if(!token) {
-    //     router.push('/register')
-    // }
+    let token = sessionStorage.getItem('Token')
+    if(token){
+      getData()
+    }
+    if(!token) {
+        router.push('/register')
+    }
 }, [])
 
 const addData = () => {
