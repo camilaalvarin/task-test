@@ -7,3 +7,5 @@ export const Layout = (props) => {
         <Link href={'/login'}></Link>
     </div>
 }
+
+export default Layout;
