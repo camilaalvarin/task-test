@@ -16,7 +16,7 @@ const register = () => {
 
     const signUp = () => {
         createUserWithEmailAndPassword(auth, email, password)
-        .then(() => {
+        .then((response) => {
             sessionStorage.setItem('Token', response.user.accessToken);
             router.push('/')
         })
