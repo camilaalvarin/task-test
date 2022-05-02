@@ -142,6 +142,7 @@ const addData = () => {
               </div>)
             })}
           </div>
+
           <div className='newTask'>
             <div>
               <input placeholder='New Todo' value={item}
@@ -158,21 +159,22 @@ const addData = () => {
             </div>
             <div className='buttonsDiv'>
               {isUpdate ? (
-                <button disabled='true' onClick={updateFields}>ADD</button> 
+                <button disabled={true} className='buttons' onClick={updateFields}>ADD</button> 
               ) :
               (  
-                <button onClick={addData}>ADD</button> 
+                <button className='buttons' onClick={addData}>ADD</button> 
               )}
               <br />
               {isUpdate ? (
-                <button className='modifyButton' onClick={updateFields}>MODIFY</button> 
+                <button className='modifyButton buttons' onClick={updateFields}>MODIFY</button> 
               ) :
               (  
-                <button className='modifyButton' disabled='true' onClick={updateFields}>MODIFY</button> 
+                <button className='modifyButton buttons' disabled={true} onClick={updateFields}>MODIFY</button> 
               )}
             </div>
           </div>
         </div>
+
       </div>
       <style jsx>{`
           @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap');
@@ -216,7 +218,6 @@ const addData = () => {
           }
           .newTask {
             display: grid;
-            margin-left: 100px;
           }
 
           .taskList {
@@ -224,13 +225,14 @@ const addData = () => {
             max-height: 200px;
             overflow: hidden;
             overflow-y: scroll;
+            margin-right: 60px;
           }
 
           .taskList::-webkit-scrollbar {
             width: 8px;     
             height: 8px;    
             display: none;  
-        }
+        } 
 
           .borderDiv {
             height: fit-content;
@@ -255,7 +257,7 @@ const addData = () => {
             margin-rigth: 100px;
           }
 
-          button {
+          .buttons {
             padding: 8px;
             width: 100px;
             background-color: #333333;
@@ -264,6 +266,13 @@ const addData = () => {
             border: 1px solid #333333;
             border-radius: 3px;
             cursor: pointer;
+          }
+
+          .buttons:hover {
+            cursor: pointer;
+            background-color: #ffb014;
+            border: 1px solid #333333;
+            color: #333333;
           }
 
           .xButton {
@@ -313,6 +322,17 @@ const addData = () => {
 
           .modifyButton {
             margin-top: -10px;
+          }
+          
+
+          @media only screen and (max-width: 900px) {
+            .flex {
+              flex-direction: column;
+            }
+
+            .newTask {
+              margin-top: 50px;
+            }
           }
     `}</style>
     </div>
