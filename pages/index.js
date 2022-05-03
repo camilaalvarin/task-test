@@ -3,6 +3,10 @@ import { useState, useEffect  } from 'react'
 import { useRouter } from 'next/router'
 import { collection, addDoc, getDocs, doc, updateDoc, deleteDoc } from 'firebase/firestore'
 import { BsFillPencilFill, BsXLg } from "react-icons/bs";
+import { FaPowerOff } from "react-icons/fa";
+import { GrInProgress } from "react-icons/gr"; 
+import { MdOutlineDone, MdOutlinePending } from "react-icons/md";
+
 
 import { database } from '../firebaseConfig';
 
@@ -10,8 +14,12 @@ export default function Home() {
 
   let router = useRouter()
   const databaseRef = collection(database, 'camila')
+
   const [fireData, setFireData] = useState([]);
   const [isUpdate, setIsUpdate] = useState(false);
+  const [ID, setID] = useState(null);
+  const [task, setTask] = useState('');
+  const [status, setStatus] = useState('');
 
   useEffect(() => {
     let token = sessionStorage.getItem('Token')
@@ -24,17 +32,15 @@ export default function Home() {
 }, [])
 
 const addData = () => {
-  if(item != '' && !tasks.includes(item)) {
     addDoc(databaseRef, {
-      tasks: item
+      task: task,
+      status: status
     })
     .then(() => {
       getData()
-      setTasks('')
-      setItem('')
+      setTask('')
+      setStatus('')
     })
-    } 
-    
 }
 
   const getData = async () => {
@@ -46,39 +52,10 @@ const addData = () => {
     })
   }
 
-  const [ID, setID] = useState(null)
-  const [tasks, setTasks] = useState('')
-  const [item, setItem] = useState('')
-
-  function removeItem (taskName) {
-    setTasks(tasks.filter((task) => {
-      return task != taskName
-      })
-      .then(() => {
-        alert('Data Updated')
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-    );
-  } 
-
-  function AddItem () {
-    if(item != '' && !tasks.includes(item)) {
-      let temp = tasks;
-      temp.push(item)
-      setTasks(temp);
-      setItem('')
-    } else {
-      alert ('Esa tarea ya existe!')
-      setItem('')
-    }
-  }
-
-  const getID = (id, tasks) => {
+  const getID = (id, task, status) => {
     setID(id)
-    setItem(tasks)
-    setTasks(tasks)
+    setTask(task)
+    setStatus(status)
     setIsUpdate(true)
   }
 
@@ -86,16 +63,18 @@ const addData = () => {
     let fieldToEdit = doc(database, 'camila', ID);
     console.log(ID)
     updateDoc(fieldToEdit, {
-      tasks: item
+      task: task,
+      status: status
     })
     .then(() => {
       setIsUpdate(false)
+      setTask('')
+      setStatus('')
       getData()
     })
     .catch((err) => {
       console.log(err)
     })
-    setItem('')
   }
 
   const deleteDocs = (id) => {
@@ -109,6 +88,20 @@ const addData = () => {
     })
   }
 
+  function statusValue (e) {
+    setStatus(e.target.value )
+  }
+
+  function taskValue (e) {
+    setTask(e.target.value)
+  }
+
+  const logout = () => {
+    sessionStorage.removeItem('Token')
+    router.push('/register')
+  }
+
+
   return (
     <div className='container'>
       <Head>
@@ -119,6 +112,7 @@ const addData = () => {
 
       <div className='navTitle'>
         <p>TODO LIST</p>
+        <button onClick={logout} className='powerOff' title='Log Out'><FaPowerOff /></button>
       </div>
       <div className='border'>
         <h2>TODO LIST</h2>
@@ -126,10 +120,14 @@ const addData = () => {
           <div className='taskList'>
             {fireData.map((data) => {
               return ( <div className='liDiv'> 
-                  <div className='borderDiv'><li>{data.tasks}</li></div>
+                  <div className='borderDiv'><li>{data.task}</li></div>
                     <div>
+                      <button className='statusButton' title={data.status} 
+                        style={data.status === 'Pending'? {color: 'red'} : data.status === 'Done'? {color: 'green'} : {color: 'black'}}>
+                        {data.status === 'Pending'? <MdOutlinePending /> : data.status === 'Done'? <MdOutlineDone /> : data.status === 'In progress'?<GrInProgress/> : null}
+                      </button>
                       <button className='xButton' onClick={() => {
-                          getID(data.id, data.tasks)
+                          getID(data.id, data.task, data.status)
                         }}>
                         <BsFillPencilFill /> 
                       </button>
@@ -145,31 +143,25 @@ const addData = () => {
 
           <div className='newTask'>
             <div>
-              <input placeholder='New Todo' value={item}
-                onChange={(e) => {
-                  setItem(e.target.value)
-                }}
+              <input placeholder='New Todo' value={task}
+                onChange={taskValue}
               >
               </input>
             </div> 
             <div>
-              <select>
-                <option>Status (Pending / In progress / Done)</option>
+              <select onChange={statusValue} value={status}>
+                <option>Status (Pending / In progress / Done) ∨</option>
+                <option value='Pending' key='Pending'>Pending</option>
+                <option value='In progress' key='In progress'>In progress</option>
+                <option value='Done' key='Done'>Done</option>
               </select>
             </div>
             <div className='buttonsDiv'>
               {isUpdate ? (
-                <button disabled={true} className='buttons' onClick={updateFields}>ADD</button> 
+                <button className='buttons' onClick={updateFields}>MODIFY</button>
               ) :
               (  
                 <button className='buttons' onClick={addData}>ADD</button> 
-              )}
-              <br />
-              {isUpdate ? (
-                <button className='modifyButton buttons' onClick={updateFields}>MODIFY</button> 
-              ) :
-              (  
-                <button className='modifyButton buttons' disabled={true} onClick={updateFields}>MODIFY</button> 
               )}
             </div>
           </div>
@@ -184,7 +176,8 @@ const addData = () => {
           }
 
           .border {
-            width: fit-content;
+            width: 861px;
+            height: 400px;
             background-color: #ffb014;
             padding: 50px;
             margin-top: 150px;
@@ -211,6 +204,8 @@ const addData = () => {
             background-color: #333333;
             color: white;
             font-weight: bolder;
+            display: flex;
+            justify-content: space-between;
           }
 
           .navTitle p {
@@ -253,10 +248,6 @@ const addData = () => {
             margin-left: 10px;
           }
 
-          .you {
-            margin-rigth: 100px;
-          }
-
           .buttons {
             padding: 8px;
             width: 100px;
@@ -271,7 +262,7 @@ const addData = () => {
           .buttons:hover {
             cursor: pointer;
             background-color: #ffb014;
-            border: 1px solid #333333;
+            border: 2px solid #333333;
             color: #333333;
           }
 
@@ -284,7 +275,20 @@ const addData = () => {
             margin-right: 10px;
             cursor: pointer;
             font-size: 20px;
-            margin-top: 4px;
+            margin-top: 15px;
+          }
+
+          .statusButton {
+            width: 20px;
+            background-color: #ffb014;
+            color: #333333;
+            font-weight: bold;
+            border: 0px;
+            margin-right: 10px;
+            cursor: pointer;
+            font-size: 20px;
+            margin-top: 15px;
+            margin-right: 35px;
           }
 
           input {
@@ -312,18 +316,27 @@ const addData = () => {
             border-bottom: 2px solid white;
             padding: 10px;
             margin-top: 15px;
+            outline: none;
+            
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
           }
 
           .buttonsDiv {
             display: grid;
             justify-self: end;
             margin-top: 20px;
-          }
-
-          .modifyButton {
-            margin-top: -10px;
+            height: 20px;
           }
           
+          .powerOff {
+            background-color: transparent;
+            border: none;
+            color: white;
+            font-size: 25px;
+            cursor: pointer;
+          }
 
           @media only screen and (max-width: 900px) {
             .flex {
